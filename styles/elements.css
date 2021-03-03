@@ -20,7 +20,6 @@ header a.brand img.white {
   display: none;
 }
 
-/* 01. About */
 table.table tr td {
   border: 0;
   padding: 3px 0;
@@ -33,7 +32,6 @@ table.table tr td a {
   display: block;
 }
 
-/* 02. Contact */
 form {
   margin: 15px;
 }
@@ -82,7 +80,6 @@ form textarea.form-control {
   height: 150px;
 }
 
-/* 03. Navigation */
 ul.main-nav {
   list-style: none;
   margin: 25px -15px 0;

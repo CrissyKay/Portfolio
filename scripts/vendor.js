@@ -175,8 +175,6 @@ jQuery.fn = jQuery.prototype = {
 		return this.prevObject || this.constructor();
 	},
 
-	// For internal use only.
-	// Behaves like an Array's method, not like a jQuery method.
 	push: push,
 	sort: arr.sort,
 	splice: arr.splice
@@ -189,21 +187,17 @@ jQuery.extend = jQuery.fn.extend = function() {
 		length = arguments.length,
 		deep = false;
 
-	// Handle a deep copy situation
 	if ( typeof target === "boolean" ) {
 		deep = target;
 
-		// Skip the boolean and the target
 		target = arguments[ i ] || {};
 		i++;
 	}
 
-	// Handle case when target is a string or something (possible in deep copy)
 	if ( typeof target !== "object" && !isFunction( target ) ) {
 		target = {};
 	}
 
-	// Extend jQuery itself if only one argument is passed
 	if ( i === length ) {
 		target = this;
 		i--;
@@ -211,25 +205,19 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 	for ( ; i < length; i++ ) {
 
-		// Only deal with non-null/undefined values
 		if ( ( options = arguments[ i ] ) != null ) {
 
-			// Extend the base object
 			for ( name in options ) {
 				copy = options[ name ];
 
-				// Prevent Object.prototype pollution
-				// Prevent never-ending loop
 				if ( name === "__proto__" || target === copy ) {
 					continue;
 				}
 
-				// Recurse if we're merging plain objects or arrays
 				if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
 					( copyIsArray = Array.isArray( copy ) ) ) ) {
 					src = target[ name ];
 
-					// Ensure proper type for the source value
 					if ( copyIsArray && !Array.isArray( src ) ) {
 						clone = [];
 					} else if ( !copyIsArray && !jQuery.isPlainObject( src ) ) {
@@ -239,10 +227,8 @@ jQuery.extend = jQuery.fn.extend = function() {
 					}
 					copyIsArray = false;
 
-					// Never move original objects, clone them
 					target[ name ] = jQuery.extend( deep, clone, copy );
 
-				// Don't bring in undefined values
 				} else if ( copy !== undefined ) {
 					target[ name ] = copy;
 				}
@@ -250,16 +236,13 @@ jQuery.extend = jQuery.fn.extend = function() {
 		}
 	}
 
-	// Return the modified object
 	return target;
 };
 
 jQuery.extend( {
 
-	// Unique for each copy of jQuery on the page
 	expando: "jQuery" + ( version + Math.random() ).replace( /\D/g, "" ),
 
-	// Assume jQuery is ready without the ready module
 	isReady: true,
 
 	error: function( msg ) {
@@ -271,20 +254,16 @@ jQuery.extend( {
 	isPlainObject: function( obj ) {
 		var proto, Ctor;
 
-		// Detect obvious negatives
-		// Use toString instead of jQuery.type to catch host objects
 		if ( !obj || toString.call( obj ) !== "[object Object]" ) {
 			return false;
 		}
 
 		proto = getProto( obj );
 
-		// Objects with no prototype (e.g., `Object.create( null )`) are plain
 		if ( !proto ) {
 			return true;
 		}
 
-		// Objects with prototype are plain iff they were constructed by a global Object function
 		Ctor = hasOwn.call( proto, "constructor" ) && proto.constructor;
 		return typeof Ctor === "function" && fnToString.call( Ctor ) === ObjectFunctionString;
 	},
@@ -298,8 +277,6 @@ jQuery.extend( {
 		return true;
 	},
 
-	// Evaluates a script in a provided context; falls back to the global one
-	// if not specified.
 	globalEval: function( code, options, doc ) {
 		DOMEval( code, { nonce: options && options.nonce }, doc );
 	},
@@ -325,7 +302,6 @@ jQuery.extend( {
 		return obj;
 	},
 
-	// results is for internal usage only
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
@@ -347,8 +323,6 @@ jQuery.extend( {
 		return arr == null ? -1 : indexOf.call( arr, elem, i );
 	},
 
-	// Support: Android <=4.0 only, PhantomJS 1 only
-	// push.apply(_, arraylike) throws on ancient WebKit
 	merge: function( first, second ) {
 		var len = +second.length,
 			j = 0,
@@ -370,25 +344,20 @@ jQuery.extend( {
 			length = elems.length,
 			callbackExpect = !invert;
 
-		// Go through the array, only saving the items
-		// that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
 			if ( callbackInverse !== callbackExpect ) {
 				matches.push( elems[ i ] );
 			}
 		}
-
 		return matches;
 	},
 
-	// arg is for internal usage only
 	map: function( elems, callback, arg ) {
 		var length, value,
 			i = 0,
 			ret = [];
 
-		// Go through the array, translating each of the items to their new values
 		if ( isArrayLike( elems ) ) {
 			length = elems.length;
 			for ( ; i < length; i++ ) {
@@ -399,7 +368,6 @@ jQuery.extend( {
 				}
 			}
 
-		// Go through every key on the object,
 		} else {
 			for ( i in elems ) {
 				value = callback( elems[ i ], i, arg );
@@ -410,15 +378,11 @@ jQuery.extend( {
 			}
 		}
 
-		// Flatten any nested arrays
 		return flat( ret );
 	},
 
-	// A global GUID counter for objects
 	guid: 1,
 
-	// jQuery.support is not used in Core but other projects attach their
-	// properties to it so it needs to exist.
 	support: support
 } );
 
@@ -426,18 +390,12 @@ if ( typeof Symbol === "function" ) {
 	jQuery.fn[ Symbol.iterator ] = arr[ Symbol.iterator ];
 }
 
-// Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
 function( _i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 } );
 
 function isArrayLike( obj ) {
-
-	// Support: real iOS 8.2 only (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
-	// hasOwn isn't used here due to false negatives
-	// regarding Nodelist length in IE
 	var length = !!obj && "length" in obj && obj.length,
 		type = toType( obj );
 
@@ -449,16 +407,6 @@ function isArrayLike( obj ) {
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
 var Sizzle =
-/*!
- * Sizzle CSS Selector Engine v2.3.5
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://js.foundation/
- *
- * Date: 2020-03-14
- */
 ( function( window ) {
 var i,
 	support,
@@ -471,8 +419,6 @@ var i,
 	outermostContext,
 	sortInput,
 	hasDuplicate,
-
-	// Local document vars
 	setDocument,
 	document,
 	docElem,
@@ -482,7 +428,6 @@ var i,
 	matches,
 	contains,
 
-	// Instance-specific data
 	expando = "sizzle" + 1 * new Date(),
 	preferredDoc = window.document,
 	dirruns = 0,
@@ -498,16 +443,12 @@ var i,
 		return 0;
 	},
 
-	// Instance methods
 	hasOwn = ( {} ).hasOwnProperty,
 	arr = [],
 	pop = arr.pop,
 	pushNative = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-
-	// Use a stripped-down indexOf as it's faster than native
-	// https://jsperf.com/thor-indexof-vs-for/5
 	indexOf = function( list, elem ) {
 		var i = 0,
 			len = list.length;
@@ -522,9 +463,6 @@ var i,
 	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|" +
 		"ismap|loop|multiple|open|readonly|required|scoped",
 
-	// Regular expressions
-
-	// http://www.w3.org/TR/css3-selectors/#whitespace
 	whitespace = "[\\x20\\t\\r\\n\\f]",
 
 	// https://www.w3.org/TR/css-syntax-3/#ident-token-diagram
@@ -637,10 +575,6 @@ var i,
 		return "\\" + ch;
 	},
 
-	// Used for iframes
-	// See setDocument()
-	// Removing the function wrapper causes a "Permission Denied"
-	// error in IE
 	unloadHandler = function() {
 		setDocument();
 	},
@@ -652,32 +586,24 @@ var i,
 		{ dir: "parentNode", next: "legend" }
 	);
 
-// Optimize for push.apply( _, NodeList )
 try {
 	push.apply(
 		( arr = slice.call( preferredDoc.childNodes ) ),
 		preferredDoc.childNodes
 	);
 
-	// Support: Android<4.0
-	// Detect silently failing push.apply
-	// eslint-disable-next-line no-unused-expressions
 	arr[ preferredDoc.childNodes.length ].nodeType;
 } catch ( e ) {
 	push = { apply: arr.length ?
 
-		// Leverage slice if possible
 		function( target, els ) {
 			pushNative.apply( target, slice.call( els ) );
 		} :
 
-		// Support: IE<9
-		// Otherwise append directly
 		function( target, els ) {
 			var j = target.length,
 				i = 0;
 
-			// Can't trust NodeList.length
 			while ( ( target[ j++ ] = els[ i++ ] ) ) {}
 			target.length = j - 1;
 		}
@@ -687,40 +613,25 @@ try {
 function Sizzle( selector, context, results, seed ) {
 	var m, i, elem, nid, match, groups, newSelector,
 		newContext = context && context.ownerDocument,
-
-		// nodeType defaults to 9, since context defaults to document
 		nodeType = context ? context.nodeType : 9;
 
 	results = results || [];
-
-	// Return early from calls with invalid selector or context
 	if ( typeof selector !== "string" || !selector ||
 		nodeType !== 1 && nodeType !== 9 && nodeType !== 11 ) {
 
 		return results;
 	}
 
-	// Try to shortcut find operations (as opposed to filters) in HTML documents
 	if ( !seed ) {
 		setDocument( context );
 		context = context || document;
 
 		if ( documentIsHTML ) {
 
-			// If the selector is sufficiently simple, try using a "get*By*" DOM method
-			// (excepting DocumentFragment context, where the methods don't exist)
 			if ( nodeType !== 11 && ( match = rquickExpr.exec( selector ) ) ) {
-
-				// ID selector
 				if ( ( m = match[ 1 ] ) ) {
-
-					// Document context
 					if ( nodeType === 9 ) {
 						if ( ( elem = context.getElementById( m ) ) ) {
-
-							// Support: IE, Opera, Webkit
-							// TODO: identify versions
-							// getElementById can match elements by name instead of ID
 							if ( elem.id === m ) {
 								results.push( elem );
 								return results;
@@ -728,13 +639,8 @@ function Sizzle( selector, context, results, seed ) {
 						} else {
 							return results;
 						}
-
-					// Element context
 					} else {
 
-						// Support: IE, Opera, Webkit
-						// TODO: identify versions
-						// getElementById can match elements by name instead of ID
 						if ( newContext && ( elem = newContext.getElementById( m ) ) &&
 							contains( context, elem ) &&
 							elem.id === m ) {
