@@ -18,4 +18,4 @@ Tasked to create a portfolio website that meets the following minimum requiremen
 
 - Must properly utilize Bootstrap components and grid system.
 
-The deployed url is:
+The deployed url is: https://crissykay.github.io/Portfolio/
