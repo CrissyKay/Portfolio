@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crystal Kaytt Design + Direction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="styles/vendor/all.css">
+    <link rel="stylesheet" type="text/css" href="styles/vendor/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/vendor/slick.css">
+    <link rel="stylesheet" type="text/css" href="styles/core.css">
+    <link rel="stylesheet" type="text/css" href="styles/elements.css">
+    <link rel="icon" type="image/png" href="icon.png">
+  </head>
+  <body class="preload">
+    <div class="container-fluid">
+      <header>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center"><a class="brand" href="index.html"><img class="default" src="img/logo.svg"></a>
+              <ul class="main-nav">
+                <li><a href="index.html" title="Work">Work</a>
+                </li>
+                <li><a href="about.html" title="About">About</a>
+                </li>
+                <li><a class="active" href="contact.html" title="Contact">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="container-fluid fadein">
+        <div class="row">
+          <div class="col-md-8 offset-2">
+            <div class="text-center intro">
+              <h1 class="typed">Write me</h1>
+            </div>
+            <form class="form mt-md" id="form" action="/php/mail.php">
+              <label>Name *</label>
+              <input class="form-control" required type="text" name="name">
+              <label>Phone number</label>
+              <input class="form-control" type="text" name="phone">
+              <label>E-mail address *</label>
+              <input class="form-control" required type="email" name="email">
+              <label>How can I assist you? *</label>
+              <textarea class="form-control" required name="message"></textarea>
+              <button class="btn btn-default" id="send" type="submit">Send message</button><span class="p-md">* These fields are required</span>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center"><span>&copy; Crystal Kaytt Design </span></div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="scripts/vendor.js"></script>
+    <script src="scripts/main.js"></script>
+
+    <script>if(document.querySelector('.typed')) var typed = new Typed('.typed', { strings: ["Write me, please.", "Hola", "こんにちは", "Ciao", "Aloha", "Hallo"], typeSpeed: 130, loop: true });</script>
+  </body>
+</html>
