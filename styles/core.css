@@ -1,5 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,600,700);
-@import url(https://fonts.googleapis.com/css?family=Playfair+Display);
+@import url(https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto+Condensed&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap);
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -541,7 +541,7 @@ footer {
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 0.8em;
-  font-family: "Poppins", Verdana, sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   padding: 15px 22px 12px;
   font-weight: 700;
 }
@@ -686,7 +686,7 @@ p strong {
   font-weight: 400;
 }
 p.serif {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Abril Fatface", cursive;
 }
 @media screen and (max-width: 768px) {
   p {
